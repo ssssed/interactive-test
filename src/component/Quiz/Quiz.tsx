@@ -1,5 +1,5 @@
 import React, {FC, SetStateAction} from 'react';
-import {Stack, Typography} from "@mui/material";
+import {Stack, Typography, useMediaQuery} from "@mui/material";
 import {useAppSelector} from "../../hook/redux-toolkit";
 import AnswerButton from "../AnswerButton/AnswerButton";
 
@@ -10,9 +10,11 @@ interface QuizProps {
 
 const Quiz: FC<QuizProps> = ({changeId, id}) => {
     const {countQuestion, activeQuestion} = useAppSelector(state => state.question);
+    const isMobile = useMediaQuery('(max-width: 600px)');
+    console.log(isMobile)
     return (
         <Stack
-            direction={'row'}
+            direction={isMobile ? 'column' : 'row'}
             maxWidth={'500px'}
             width={'100%'}
             border={'1px solid lightgray'}
@@ -25,11 +27,11 @@ const Quiz: FC<QuizProps> = ({changeId, id}) => {
                 minHeight: '120px'
             }}
         >
-            <Stack direction={'column'}>
+            <Stack direction={!isMobile ? 'column' : 'row'} gap={'20px'} alignItems={isMobile ? 'center' : 'start'}>
                 <Typography variant={'h6'}>{activeQuestion.text}</Typography>
-                <Typography variant={'h6'} sx={{marginTop: 'auto'}}>{activeQuestion.stage}/{countQuestion}</Typography>
+                <Typography variant={'h6'} sx={{marginTop: !isMobile ? 'auto' : 0}}>{activeQuestion.stage}/{countQuestion}</Typography>
             </Stack>
-            <Stack direction={'column'} marginLeft={'auto'} gap={'10px'}>
+            <Stack direction={'column'} marginLeft={!isMobile ? 'auto' : "0"} gap={'10px'} justifyContent={'center'}>
                 {
                     activeQuestion.variant.map((button) =>
                         (
