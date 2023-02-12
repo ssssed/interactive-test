@@ -15,12 +15,12 @@ const Quiz: FC<QuizProps> = ({changeId, id}) => {
     return (
         <Stack
             direction={isMobile ? 'column' : 'row'}
-            maxWidth={'500px'}
+            maxWidth={'600px'}
             width={'100%'}
             border={'1px solid lightgray'}
             padding={'20px'}
             margin={'100px auto 0'}
-            gap={'10px'}
+            gap={'15px'}
             sx={{
                 backgroundColor: 'white',
                 borderRadius: '8px',
